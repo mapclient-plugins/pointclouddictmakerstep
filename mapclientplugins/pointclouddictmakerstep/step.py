@@ -31,7 +31,7 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#pointcloud'))
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#uses',
-                      'string'))
+                      'python#string'))
 
         self._pointsDict = None
         self._points = None
