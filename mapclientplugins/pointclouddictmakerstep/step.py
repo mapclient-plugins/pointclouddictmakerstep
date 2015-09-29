@@ -22,20 +22,24 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
         # Ports:
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#provides',
-                      'ju#pointclouddict'))
+                      'http://physiomeproject.org/workflow/1.0/rdf-schema#pointclouddict'))
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#uses',
-                      'ju#pointclouddict'))
+                      'http://physiomeproject.org/workflow/1.0/rdf-schema#pointclouddict'))
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#uses',
-                      'ju#pointcoordinates'))
+                      'http://physiomeproject.org/workflow/1.0/rdf-schema#pointcloud'))
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#uses',
                       'string'))
+        self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
+                      'http://physiomeproject.org/workflow/1.0/rdf-schema#uses',
+                      'http://physiomeproject.org/workflow/1.0/rdf-schema#pointclouddict'))
 
         self._pointsDict = None
         self._points = None
         self._pointsName = None
+        self._pointsDict2 = None
 
     def execute(self):
         '''
@@ -44,9 +48,13 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
         may be connected up to a button in a widget for example.
         '''
         # Put your execute step code here before calling the '_doneExecution' method.
-        if self._pointsDict==None:
+        if self._pointsDict is None:
             self._pointsDict = {}
-        self._pointsDict[self._pointsName] = self._points
+        if self._pointsName is not None:
+            self._pointsDict[self._pointsName] = self._points
+        if self._pointsDict2 is not None:
+            self._pointsDict.update(self._pointsDict2)
+        print(self._pointsDict.keys())
         self._doneExecution()
 
     def setPortData(self, index, dataIn):
@@ -56,11 +64,13 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
         uses port for this step then the index can be ignored.
         '''
         if index == 1:
-            self._pointsDict = dataIn # ju#pointsclouddict
+            self._pointsDict = dataIn # ju#pointclouddict
         elif index == 2:
             self._points = dataIn # ju#pointscoordinates
-        else:
+        elif index == 3:
             self._pointsName = dataIn # string
+        else:
+            self._pointsDict2 = dataIn # pointclouddict
 
     def getPortData(self, index):
         '''
