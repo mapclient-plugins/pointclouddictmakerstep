@@ -19,4 +19,7 @@ This file is part of MAP Client. (http://launchpad.net/mapclient)
 """
 __version__ = '0.1.0'
 __author__ = 'Ju Zhang'
+__stepname__ = 'points Cloud Dict Maker'
+__location__ = 'https://github.com/mapclient-plugins/pointclouddictmakerstep/archive/master.zip'
+
 from mapclientplugins.pointclouddictmakerstep import step
