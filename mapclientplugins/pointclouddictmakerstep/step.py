@@ -1,10 +1,6 @@
-
 '''
 MAP Client Plugin Step
 '''
-
-import json
-from PySide import QtGui
 
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
 
@@ -17,7 +13,7 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
 
     def __init__(self, location):
         super(pointsCloudDictMakerStep, self).__init__('points Cloud Dict Maker', location)
-        self._configured = True # A step cannot be executed until it has been configured.
+        self._configured = True  # A step cannot be executed until it has been configured.
         self._category = 'General'
         # Add any other initialisation code here:
         # Ports:
@@ -65,13 +61,13 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
         uses port for this step then the index can be ignored.
         '''
         if index == 1:
-            self._pointsDict = dataIn # ju#pointclouddict
+            self._pointsDict = dataIn  # ju#pointclouddict
         elif index == 2:
-            self._points = dataIn # ju#pointscoordinates
+            self._points = dataIn  # ju#pointscoordinates
         elif index == 3:
-            self._pointsName = dataIn # string
+            self._pointsName = dataIn  # string
         else:
-            self._pointsDict2 = dataIn # pointclouddict
+            self._pointsDict2 = dataIn  # pointclouddict
 
     def getPortData(self, index):
         '''
@@ -79,7 +75,7 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
         The index is the index of the port in the port list.  If there is only one
         provides port for this step then the index can be ignored.
         '''
-        return self._pointsDict # ju#pointsclouddict
+        return self._pointsDict  # ju#pointsclouddict
 
     def configure(self):
         '''
@@ -95,13 +91,13 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
         '''
         The identifier is a string that must be unique within a workflow.
         '''
-        return 'pointsCloudDictMaker' # TODO: The string must be replaced with the step's unique identifier
+        return 'pointsCloudDictMaker'  # TODO: The string must be replaced with the step's unique identifier
 
     def setIdentifier(self, identifier):
         '''
         The framework will set the identifier for this step when it is loaded.
         '''
-        pass # TODO: Must actually set the step's identifier here
+        pass  # TODO: Must actually set the step's identifier here
 
     def serialize(self):
         '''
@@ -116,4 +112,3 @@ class pointsCloudDictMakerStep(WorkflowStepMountPoint):
         given by mapclient
         '''
         pass
-
